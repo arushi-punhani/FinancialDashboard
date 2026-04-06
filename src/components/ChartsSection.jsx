@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const slicePalette = ['#38bdf8', '#818cf8', '#0ea5e9', '#14b8a6', '#f97316'];
+const slicePalette = ['#fb923c', '#f97316', '#fdba74', '#f59e0b', '#ea580c'];
 
 const polarToCartesian = (cx, cy, radius, angleInDegrees) => {
   const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180;
@@ -78,8 +78,8 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
     <div>
       <div className="mb-5 flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h2 className="text-xl font-semibold text-white">Budget Allocation</h2>
-          <p className="mt-1 text-sm text-blue-100/70">
+          <h2 className="text-xl font-semibold text-orange-300">Budget Allocation</h2>
+          <p className="mt-1 text-sm text-zinc-400">
             Hover a slice to see spent and remaining budget for that category
           </p>
         </div>
@@ -87,7 +87,7 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(380px,520px)_1fr]">
-        <div className="rounded-3xl border border-blue-200/15 bg-blue-950/45 p-4">
+        <div className="rounded-3xl border border-orange-500/15 bg-zinc-950/75 p-4">
           <div className="flex items-center justify-center">
             <svg viewBox="0 0 240 240" className="h-80 w-80 overflow-visible sm:h-96 sm:w-96">
               {segments.map((segment) => (
@@ -95,7 +95,7 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
                   key={segment.category}
                   d={segment.path}
                   fill={segment.color}
-                  stroke="rgba(5, 16, 41, 0.95)"
+                  stroke="rgba(12, 10, 9, 0.98)"
                   strokeWidth={activeSegment?.category === segment.category ? 5 : 3}
                   initial={{ opacity: 0, scale: 0.96 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -106,12 +106,12 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
                   onMouseEnter={() => setActiveCategory(segment.category)}
                 />
               ))}
-              <circle cx="120" cy="120" r="54" fill="rgba(8, 18, 46, 0.92)" />
+              <circle cx="120" cy="120" r="54" fill="rgba(12, 10, 9, 0.95)" />
               <text
                 x="120"
                 y="112"
                 textAnchor="middle"
-                className="fill-blue-100 text-[9px] font-semibold uppercase tracking-[0.18em] sm:text-[10px]"
+                className="fill-orange-200 text-[9px] font-semibold uppercase tracking-[0.18em] sm:text-[10px]"
               >
                 Monthly Limit
               </text>
@@ -130,8 +130,8 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
                 onFocus={() => setActiveCategory(segment.category)}
                 className={`rounded-2xl border px-3 py-3 text-left transition ${
                   activeSegment?.category === segment.category
-                    ? 'border-cyan-300/40 bg-blue-900/70'
-                    : 'border-blue-200/10 bg-blue-950/40 hover:border-cyan-300/25'
+                    ? 'border-orange-400/45 bg-orange-950/25'
+                    : 'border-orange-500/10 bg-black/45 hover:border-orange-400/30'
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
@@ -140,11 +140,11 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
                       className="h-3 w-3 rounded-full"
                       style={{ backgroundColor: segment.color }}
                     />
-                    <span className="text-sm font-medium text-blue-50">{segment.category}</span>
+                    <span className="text-sm font-medium text-zinc-100">{segment.category}</span>
                   </div>
-                  <span className="text-xs text-blue-100/65">{segment.percentage}%</span>
+                  <span className="text-xs text-zinc-500">{segment.percentage}%</span>
                 </div>
-                <p className="mt-2 text-xs text-blue-100/65">
+                <p className="mt-2 text-xs text-zinc-500">
                   Budget {formatCurrency(segment.budget)}
                 </p>
               </button>
@@ -157,11 +157,11 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
             key={activeSegment?.category}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-3xl border border-blue-200/15 bg-gradient-to-br from-blue-900/55 to-slate-950/50 p-5"
+            className="rounded-3xl border border-orange-500/15 bg-gradient-to-br from-orange-950/18 to-black p-5"
           >
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-100/55">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500">
                   Active Segment
                 </p>
                 <h3 className="mt-2 text-2xl font-semibold text-white">
@@ -177,20 +177,20 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
             </div>
 
             <div className="mt-5 grid gap-3 md:grid-cols-3">
-              <div className="rounded-2xl border border-blue-200/10 bg-blue-950/50 p-4">
-                <p className="text-xs uppercase tracking-[0.2em] text-blue-100/55">Spent</p>
+              <div className="rounded-2xl border border-orange-500/10 bg-zinc-950/75 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">Spent</p>
                 <p className="mt-2 text-2xl font-semibold text-rose-300">
                   {formatCurrency(activeSegment?.spent ?? 0)}
                 </p>
               </div>
-              <div className="rounded-2xl border border-blue-200/10 bg-blue-950/50 p-4">
-                <p className="text-xs uppercase tracking-[0.2em] text-blue-100/55">Left</p>
+              <div className="rounded-2xl border border-orange-500/10 bg-zinc-950/75 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">Left</p>
                 <p className="mt-2 text-2xl font-semibold text-emerald-300">
                   {formatCurrency(activeSegment?.left ?? 0)}
                 </p>
               </div>
-              <div className="rounded-2xl border border-blue-200/10 bg-blue-950/50 p-4">
-                <p className="text-xs uppercase tracking-[0.2em] text-blue-100/55">Limit</p>
+              <div className="rounded-2xl border border-orange-500/10 bg-zinc-950/75 p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">Limit</p>
                 <p className="mt-2 text-2xl font-semibold text-white">
                   {formatCurrency(activeSegment?.budget ?? 0)}
                 </p>
@@ -204,23 +204,23 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
             )}
           </motion.div>
 
-          <div className="rounded-3xl border border-blue-200/15 bg-blue-950/40 p-5">
+          <div className="rounded-3xl border border-orange-500/15 bg-zinc-950/70 p-5">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <h3 className="text-lg font-semibold text-white">Monthly Budget Limit</h3>
-                <p className="mt-1 text-sm text-blue-100/70">
+                <h3 className="text-lg font-semibold text-orange-200">Monthly Budget Limit</h3>
+                <p className="mt-1 text-sm text-zinc-400">
                   {formatCurrency(monthlyBudget.spent)} spent out of {formatCurrency(monthlyBudget.limit)}
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-xs uppercase tracking-[0.2em] text-blue-100/55">Remaining</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">Remaining</p>
                 <p className={`mt-1 text-2xl font-semibold ${budgetTone.text}`}>
                   {formatCurrency(Math.max(monthlyBudget.remaining, 0))}
                 </p>
               </div>
             </div>
 
-            <div className="mt-4 h-4 overflow-hidden rounded-full bg-blue-950/90 ring-1 ring-inset ring-blue-200/10">
+            <div className="mt-4 h-4 overflow-hidden rounded-full bg-black ring-1 ring-inset ring-orange-500/10">
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${Math.min(monthlyBudget.progress * 100, 100)}%` }}
@@ -231,10 +231,10 @@ export default function ChartsSection({ budgetSegments, monthlyBudget }) {
             </div>
 
             <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-sm">
-              <span className="text-blue-100/65">
+              <span className="text-zinc-400">
                 Left this month: <span className={`font-semibold ${budgetTone.text}`}>{formatCurrency(Math.max(monthlyBudget.remaining, 0))}</span>
               </span>
-              <span className="text-blue-100/65">
+              <span className="text-zinc-400">
                 {monthlyBudget.remaining < 0
                   ? `Exceeded by ${formatCurrency(Math.abs(monthlyBudget.remaining))}`
                   : `${Math.round(remainingRatio * 100)}% of budget still available`}

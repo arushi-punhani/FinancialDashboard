@@ -124,25 +124,28 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#030b1e] via-[#071739] to-[#0c2a59] px-4 py-8 sm:px-6 lg:px-10 xl:px-12">
-      <div className="pointer-events-none absolute -left-24 -top-28 h-96 w-96 rounded-full bg-sky-500/25 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-28 -right-28 h-96 w-96 rounded-full bg-blue-400/20 blur-3xl" />
+    <div className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(249,115,22,0.16),_transparent_28%),linear-gradient(135deg,#020202_0%,#090909_35%,#121212_100%)] px-4 py-8 sm:px-6 lg:px-10 xl:px-12">
+      <div className="pointer-events-none absolute -left-24 -top-28 h-96 w-96 rounded-full bg-orange-500/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-28 -right-28 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.018)_1px,transparent_1px)] bg-[size:140px_140px] opacity-20" />
 
       <div className="relative w-full">
         <motion.header
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-6"
+          className="mb-8 border-b border-orange-500/10 pb-6"
         >
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-cyan-200">Personal Finance</p>
-          <h1 className="mt-2 text-4xl font-bold leading-tight text-white sm:text-5xl">Finance Dashboard</h1>
-          <p className="mt-2 max-w-2xl text-sm text-blue-100/80 sm:text-base">
+          <p className="text-sm font-bold uppercase tracking-[0.4em] text-orange-400">Personal Finance</p>
+          <h1 className="mt-3 max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.04em] text-orange-400 drop-shadow-[0_0_28px_rgba(251,146,60,0.18)] sm:text-6xl xl:text-7xl">
+            Finance Dashboard
+          </h1>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-zinc-300 sm:text-lg">
             Track your cashflow, monitor trends, and make smarter decisions.
           </p>
         </motion.header>
 
-        <motion.section {...panelMotion} className="mb-4 rounded-3xl border border-blue-200/20 bg-blue-950/55 p-5 backdrop-blur-xl">
+        <motion.section {...panelMotion} className="mb-4 rounded-3xl border border-orange-500/15 bg-black/55 p-5 backdrop-blur-xl">
           <RoleSwitcher role={role} setRole={setRole} addTransaction={addTransaction} />
         </motion.section>
 
@@ -150,11 +153,11 @@ export default function App() {
           <SummaryCards income={income} expenses={expenses} balance={balance} />
         </motion.section>
 
-        <motion.section {...panelMotion} className="mb-4 rounded-3xl border border-blue-200/20 bg-blue-950/55 p-5 backdrop-blur-xl">
+        <motion.section {...panelMotion} className="mb-4 rounded-3xl border border-orange-500/15 bg-black/55 p-5 backdrop-blur-xl">
           <ChartsSection budgetSegments={budgetSegments} monthlyBudget={monthlyBudget} />
         </motion.section>
 
-        <motion.section {...panelMotion} className="mb-4 rounded-3xl border border-blue-200/20 bg-blue-950/55 p-5 backdrop-blur-xl">
+        <motion.section {...panelMotion} className="mb-4 rounded-3xl border border-orange-500/15 bg-black/55 p-5 backdrop-blur-xl">
           <TransactionsTable
             filteredTransactions={filteredTransactions}
             search={search}
@@ -164,7 +167,7 @@ export default function App() {
           />
         </motion.section>
 
-        <motion.section {...panelMotion} className="rounded-3xl border border-blue-200/20 bg-blue-950/55 p-5 backdrop-blur-xl">
+        <motion.section {...panelMotion} className="rounded-3xl border border-orange-500/15 bg-black/55 p-5 backdrop-blur-xl">
           <Insights highestCategory={highestCategory} />
         </motion.section>
       </div>

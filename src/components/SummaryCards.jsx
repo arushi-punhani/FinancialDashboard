@@ -11,9 +11,9 @@ export default function SummaryCards({ income, expenses, balance }) {
   };
 
   const cards = [
-    { label: 'Total Balance', value: balance, tone: 'from-blue-500/45 to-blue-900/80' },
-    { label: 'Total Income', value: income, tone: 'from-cyan-500/40 to-blue-900/80' },
-    { label: 'Total Expenses', value: expenses, tone: 'from-indigo-500/40 to-blue-900/80' },
+    { label: 'Total Balance', value: balance, tone: 'from-orange-500/30 via-orange-400/12 to-black' },
+    { label: 'Total Income', value: income, tone: 'from-amber-500/25 via-orange-400/10 to-black' },
+    { label: 'Total Expenses', value: expenses, tone: 'from-rose-500/18 via-orange-500/10 to-black' },
   ];
 
   return (
@@ -26,9 +26,9 @@ export default function SummaryCards({ income, expenses, balance }) {
           whileHover={{ y: -10, scale: 1.02 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ delay: index * 0.08, duration: 0.35 }}
-          className={`rounded-2xl border border-blue-200/20 bg-gradient-to-br ${card.tone} p-5 shadow-[0_18px_45px_rgba(8,15,40,0.22)] backdrop-blur-xl transition-[box-shadow,border-color] duration-300 hover:border-cyan-200/40 hover:shadow-[0_28px_65px_rgba(56,189,248,0.22)]`}
+          className={`rounded-2xl border border-orange-500/20 bg-gradient-to-br ${card.tone} p-5 shadow-[0_20px_50px_rgba(0,0,0,0.4)] backdrop-blur-xl transition-[box-shadow,border-color] duration-300 hover:border-orange-400/50 hover:shadow-[0_28px_65px_rgba(251,146,60,0.18)]`}
         >
-          <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-100/75">{card.label}</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400">{card.label}</h2>
           <p className="mt-3 text-3xl font-semibold text-white">{formatCompactCurrency(card.value)}</p>
         </motion.article>
       ))}

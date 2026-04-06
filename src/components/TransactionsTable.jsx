@@ -26,19 +26,19 @@ export default function TransactionsTable({
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-xl font-semibold text-white">Transactions</h2>
+        <h2 className="text-xl font-semibold text-orange-300">Transactions</h2>
         <div className="flex flex-wrap gap-2">
           <input
             placeholder="Search category"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="h-10 rounded-xl border border-blue-200/20 bg-blue-900/60 px-3 text-sm text-slate-100 placeholder:text-blue-100/45 outline-none transition focus:border-cyan-300/50"
+            className="h-10 rounded-xl border border-orange-500/20 bg-zinc-950/85 px-3 text-sm text-zinc-100 placeholder:text-zinc-500 outline-none transition focus:border-orange-400/55"
           />
 
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="h-10 rounded-xl border border-blue-200/20 bg-blue-900/60 px-3 text-sm text-slate-100 outline-none transition focus:border-cyan-300/50"
+            className="h-10 rounded-xl border border-orange-500/20 bg-zinc-950/85 px-3 text-sm text-zinc-100 outline-none transition focus:border-orange-400/55"
           >
             <option value="all">All Types</option>
             <option value="income">Income</option>
@@ -47,9 +47,9 @@ export default function TransactionsTable({
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-blue-200/15">
+      <div className="overflow-x-auto rounded-2xl border border-orange-500/15">
         <table className="min-w-full border-collapse text-left text-sm">
-          <thead className="bg-blue-900/60 text-[11px] uppercase tracking-[0.14em] text-blue-100/80">
+          <thead className="bg-zinc-900 text-[11px] uppercase tracking-[0.2em] text-orange-200/80">
             <tr>
               <th className="px-3 py-3">Date</th>
               <th className="px-3 py-3">Amount</th>
@@ -65,15 +65,15 @@ export default function TransactionsTable({
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.24, delay: index * 0.03 }}
-                className="border-t border-blue-200/10 odd:bg-blue-900/20 even:bg-blue-950/15"
+                className="border-t border-orange-500/10 odd:bg-zinc-900/65 even:bg-black/55"
               >
-                <td className="px-3 py-3 text-blue-100/90">{formatDate(t.date)}</td>
+                <td className="px-3 py-3 text-zinc-200">{formatDate(t.date)}</td>
                 <td className={`px-3 py-3 font-semibold ${t.type === 'income' ? 'text-emerald-300' : 'text-rose-300'}`}>
                   {t.type === 'income' ? '+' : '-'}
                   {formatCurrency(t.amount)}
                 </td>
                 <td className="px-3 py-3">
-                  <span className="inline-flex rounded-full bg-blue-400/20 px-3 py-1 text-xs font-medium text-blue-100">
+                  <span className="inline-flex rounded-full bg-orange-500/12 px-3 py-1 text-xs font-medium text-orange-100 ring-1 ring-inset ring-orange-400/20">
                     {t.category}
                   </span>
                 </td>
@@ -95,7 +95,7 @@ export default function TransactionsTable({
       </div>
 
       {filteredTransactions.length === 0 && (
-        <p className="mt-3 text-sm text-blue-100/65">No transactions match your filters.</p>
+        <p className="mt-3 text-sm text-zinc-400">No transactions match your filters.</p>
       )}
     </div>
   );
