@@ -28,9 +28,10 @@ export default function Insights({ highestCategory }) {
             key={card.title}
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -8, scale: 1.015 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ delay: index * 0.08, duration: 0.35 }}
-            className={`rounded-2xl border bg-gradient-to-br p-4 ${card.tone}`}
+            className={`rounded-2xl border bg-gradient-to-br p-4 shadow-[0_18px_38px_rgba(6,12,32,0.2)] transition-[box-shadow,border-color] duration-300 hover:border-cyan-200/40 hover:shadow-[0_24px_52px_rgba(34,211,238,0.18)] ${card.tone}`}
           >
             <h3 className="mb-2 text-sm font-semibold text-blue-50">{card.title}</h3>
             <p className="text-sm leading-relaxed text-blue-100/75">{card.text}</p>

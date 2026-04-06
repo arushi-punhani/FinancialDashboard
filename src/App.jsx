@@ -7,6 +7,14 @@ import SummaryCards from './components/SummaryCards';
 import TransactionsTable from './components/TransactionsTable';
 import initialTransactions from './Data/transactions';
 
+const categoryBudgets = {
+  'Living Expenses': 18000,
+  Food: 9000,
+  Shopping: 12000,
+  Travel: 8000,
+  Misc: 5000,
+};
+
 const panelMotion = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
@@ -58,6 +66,35 @@ export default function App() {
     return totals;
   }, [transactions]);
 
+  const budgetSegments = useMemo(
+    () =>
+      Object.entries(categoryBudgets).map(([category, budget]) => {
+        const spent = categoryTotals[category] || 0;
+
+        return {
+          category,
+          budget,
+          spent,
+          left: Math.max(budget - spent, 0),
+          overBudget: Math.max(spent - budget, 0),
+        };
+      }),
+    [categoryTotals]
+  );
+
+  const monthlyBudget = useMemo(() => {
+    const limit = Object.values(categoryBudgets).reduce((sum, amount) => sum + amount, 0);
+    const remaining = limit - expenses;
+    const spentRatio = limit === 0 ? 0 : expenses / limit;
+
+    return {
+      limit,
+      spent: expenses,
+      remaining,
+      progress: Math.min(spentRatio, 1),
+    };
+  }, [expenses]);
+
   const highestCategory = useMemo(() => {
     const entries = Object.entries(categoryTotals);
     if (!entries.length) return 'No expense data yet';
@@ -87,11 +124,11 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#030b1e] via-[#071739] to-[#0c2a59] px-4 py-8 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#030b1e] via-[#071739] to-[#0c2a59] px-4 py-8 sm:px-6 lg:px-10 xl:px-12">
       <div className="pointer-events-none absolute -left-24 -top-28 h-96 w-96 rounded-full bg-sky-500/25 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-28 -right-28 h-96 w-96 rounded-full bg-blue-400/20 blur-3xl" />
 
-      <div className="relative mx-auto w-full max-w-6xl">
+      <div className="relative w-full">
         <motion.header
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,7 +151,7 @@ export default function App() {
         </motion.section>
 
         <motion.section {...panelMotion} className="mb-4 rounded-3xl border border-blue-200/20 bg-blue-950/55 p-5 backdrop-blur-xl">
-          <ChartsSection categoryTotals={categoryTotals} />
+          <ChartsSection budgetSegments={budgetSegments} monthlyBudget={monthlyBudget} />
         </motion.section>
 
         <motion.section {...panelMotion} className="mb-4 rounded-3xl border border-blue-200/20 bg-blue-950/55 p-5 backdrop-blur-xl">
